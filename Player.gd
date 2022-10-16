@@ -4,11 +4,6 @@ signal hit
 export var speed = 400 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -40,14 +35,13 @@ func _process(delta):
 	if velocity.x != 0:
 		$AnimatedSprite.animation = "walk"
 		$AnimatedSprite.flip_v = false
-		# See the note below about boolean assignment.
+		# See the note below about boolesan assignment.
 		$AnimatedSprite.flip_h = velocity.x < 0
 	elif velocity.y != 0:
 		$AnimatedSprite.animation = "up"
 		$AnimatedSprite.flip_v = velocity.y > 0
 
-#func _on_Player_body_entered(body):
-func _on_Player_body_entered():
+func _on_Player_body_entered(_body):
 	hide()
 	emit_signal("hit")
 	# Must be deferred as we can't change physics properties on a physics callback.
